@@ -59,9 +59,9 @@ public class Operators {
 		
 		// watch your increments!
 		// in this case, the value of i is used by the println() method BEFORE being incremented
-		for(int i = 0; i < 10; ) {
-			System.out.println(i++);
-		}
+//		for(int i = 0; i < 10; ) {
+//			System.out.println(i++);
+//		}
 		
 //		Person person = new Person("Jon");
 		Person person = null;
@@ -73,7 +73,36 @@ public class Operators {
 		} else {
 			System.out.println("Failure!");
 		}
-
+		
+		// important to keep track of what "returns" what
+		int i = 5;
+		i = 6;
+		System.out.println(5 + (i = 7));
+		
+		System.out.println(5 < 6 | 6 < 5);
+		
+		// ternary operator -- ?
+		// shorthand way of writing a true/false question
+		String ternaryResult = (4 > 6) ? "True" : "False";
+		System.out.println(ternaryResult);
+		
+		String compoundTernaryResult = (5 > 3) ? (3 > 5) ? "Yes" : "No" : "Maybe";
+		System.out.println(compoundTernaryResult);
+		
+		String otherResult = (2 > 1) ? (4 / 2 == 1) ? "First" : (1 - 1 == 0) ? "Second" : "Third" : "Fourth";
+		otherResult = (2 > 1) ? (4 / 2 == 1) ? "First" : "Second" : "Fourth";
+		otherResult = (2 > 1) ? "Second" : "Fourth";
+		System.out.println(otherResult);
+		
+		int j = 0;
+		
+		// the assignment operator (=) returns the newly assigned value before the method runs
+		System.out.println(addFive(j = 5));
+		
+	}
+	
+	public static int addFive(int num) {
+		return num + 5;
 	}
 
 }

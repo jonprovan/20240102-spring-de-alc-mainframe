@@ -85,6 +85,8 @@ public class DataTypes {
 		
 		Long myLongObject = new Long(123123123);
 		System.out.println(myLongObject);
+		
+		Methods.printHi();
 
 	}
 
