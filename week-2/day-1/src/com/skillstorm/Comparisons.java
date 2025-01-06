@@ -12,7 +12,7 @@ public class Comparisons {
 
 	public static void main(String[] args) {
 		
-		// For our custom objects, we can either use Comparator OR Comparable
+		// For our custom objects, we can use Comparator and/or Comparable
 		// Comparator is a third-party object that compares two objects of our custom type
 		// Comparable is implemented by our object itself and compares it to another object of the same type
 		
