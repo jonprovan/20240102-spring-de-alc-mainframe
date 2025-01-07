@@ -86,4 +86,61 @@ CREATE TABLE `superheroes`.`hero` (
     REFERENCES `superheroes`.`villain` (`villain_id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE);
+    
+CREATE TABLE `superheroes`.`power` (
+  `power_id` INT NOT NULL AUTO_INCREMENT,
+  `power_name` VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`power_id`));
+  
+CREATE TABLE `superheroes`.`hero_power` (
+  `hero_id` INT NOT NULL,
+  `power_id` INT NOT NULL,
+  PRIMARY KEY (`hero_id`, `power_id`),
+  INDEX `hero_power_id_idx` (`power_id` ASC) VISIBLE,
+  CONSTRAINT `hero_id`
+    FOREIGN KEY (`hero_id`)
+    REFERENCES `superheroes`.`hero` (`hero_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `hero_power_id`
+    FOREIGN KEY (`power_id`)
+    REFERENCES `superheroes`.`power` (`power_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+CREATE TABLE `superheroes`.`villain_power` (
+  `villain_id` INT NOT NULL,
+  `power_id` INT NOT NULL,
+  PRIMARY KEY (`villain_id`, `power_id`),
+  INDEX `villain_power_id_idx` (`power_id` ASC) VISIBLE,
+  CONSTRAINT `villain_id`
+    FOREIGN KEY (`villain_id`)
+    REFERENCES `superheroes`.`villain` (`villain_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `villain_power_id`
+    FOREIGN KEY (`power_id`)
+    REFERENCES `superheroes`.`power` (`power_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+SELECT * FROM hero;
+SELECT * FROM hero_power;
+SELECT * FROM origin;
+SELECT * FROM power;
+SELECT * FROM team;
+SELECT * FROM universe;
+SELECT * FROM villain;
+SELECT * FROM villain_power;
+
+INSERT INTO universe(universe_name, universe_founded) VALUES('Marvel', 1939);
+INSERT INTO team(team_name, team_established) VALUES('Avengers', '1963');
+INSERT INTO origin(origin_story) VALUES('Got stuck in cave. Made armor. Got out of cave.');
+INSERT INTO hero(hero_stage_name, hero_real_name, hero_age, archrival, origin_id, team_id, universe_id)
+	VALUES('Iron Man', 'Tony Stark', 42, NULL, 1, 1, 1);
+INSERT INTO power(power_name) VALUES('Flight'), ('Super Intelligence'), ('Snark'), ('Pew-Pew');
+INSERT INTO hero_power(hero_id, power_id) VALUES(1, 1), (1, 2), (1, 3), (1, 4);
+
+SELECT hero_stage_name, power_name FROM hero JOIN hero_power ON hero.hero_id = hero_power.hero_id
+				 JOIN power ON hero_power.power_id = power.power_id;
 
