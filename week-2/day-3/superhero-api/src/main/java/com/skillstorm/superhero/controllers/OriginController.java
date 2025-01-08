@@ -1,5 +1,7 @@
 package com.skillstorm.superhero.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,12 +31,16 @@ import com.skillstorm.superhero.services.OriginService;
 // you may also see CORS filtering here, saying only certain origins can access these endpoints
 public class OriginController {
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private OriginService service;
 	
 	// this maps a GET request using this suffix to this method
 	@GetMapping
 	public Iterable<Origin> findAll(@RequestParam(name = "startsWith", required = false) String startsWith) {
+//		logger.debug("******* Controller Log *******");
+		
 		return service.findAll(startsWith);
 	}
 	

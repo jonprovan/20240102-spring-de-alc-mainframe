@@ -1,10 +1,9 @@
 package com.skillstorm.superhero.services;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,10 @@ import com.skillstorm.superhero.repositories.OriginRepository;
 // this specifies this class as a service and makes it scannable/injectable, like @Repository
 @Service
 public class OriginService {
+	
+	// creating a Logger to use
+	// no annotations! \ O.O /
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// we have a few ways to inject a dependent object
 	// one is with the @Autowired annotation
@@ -39,6 +42,9 @@ public class OriginService {
 	
 	// get all
 	public Iterable<Origin> findAll(String startsWith) {
+		// using our logger
+//		logger.debug("********** Test Log ***********");
+		
 		// if the parameter fed is non-null and not empty, run our custom method
 		if (startsWith != null && !startsWith.equals(""))
 			// truncating the string to a single character, then tacking on the wildcard
