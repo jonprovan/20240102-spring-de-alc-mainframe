@@ -124,6 +124,76 @@ CREATE TABLE `superheroes`.`villain_power` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);
 
+INSERT INTO universe(universe_name, universe_founded) VALUES('Marvel', 1939), 
+															('DC', 1934), 
+                                                            ('Image', 1992);
+INSERT INTO team(team_name, team_established) VALUES('Avengers', 'The Avengers #1, September 1963'), 
+													('Justice League', 'The Brave and the Bold #28, January 1960'), 
+                                                    ('Sinister Six', 'The Amazing Spider-Man Annual #1, January 1964');
+INSERT INTO origin(origin_story) VALUES('Got stuck in cave. Made armor. Got out of cave.'), 
+									   ('Kidnapped and forced into assassinhood.'), 
+									   ('Exposed to extensive gamma radiation.'), 
+									   ('Planet destroyed. Escape pod sent him to Earth as a baby.'), 
+									   ('Parents killed. Vowed revenge on criminal underworld.'), 
+									   ('Amazonian goddess. Sculpted from clay by her mother.'), 
+									   ('Died and went to Hell. Made a deal with Malebolgia.'), 
+									   ('Mechanical arms took on a life of their own and controlled his mind.'), 
+									   ('Struck by lightning while working on a power line.'), 
+									   ('Fooled around and found out at a nuclear testing site.'), 
+									   ('From abuse and poverty, developed severe megalomania.'), 
+									   ('No one really knows...just flat-out insane.');
+INSERT INTO villain(villain_stage_name, villain_real_name, villain_age, origin_id, team_id, universe_id)
+	VALUES('Doctor Octopus', 'Otto Octavius', 50, 8, 3, 1),
+		  ('Electro', 'Max Dillon', 31, 9, 3, 1),
+		  ('Sandman', 'Flint Marko', 39, 10, 3, 1),
+		  ('Lex Luthor', 'Lex Luthor', 55, 11, NULL, 2),
+		  ('The Joker', NULL, 41, 12, NULL, 3);
+INSERT INTO hero(hero_stage_name, hero_real_name, hero_age, archrival, origin_id, team_id, universe_id)
+	VALUES('Iron Man', 'Tony Stark', 42, NULL, 1, 1, 1),
+		  ('Black Widow', 'Natasha Romanova', 35, NULL, 2, 1, 1),
+		  ('The Incredible Hulk', 'Bruce Banner', 45, NULL, 3, 1, 1),
+		  ('Superman', 'Clark Kent', 30, 4, 4, 2, 2),
+		  ('Batman', 'Bruce Wayne', 40, 5, 5, 2, 2),
+		  ('Wonder Woman', 'Diana Prince', 100, NULL, 6, 2, 2),
+		  ('Spawn', 'Al Simmons', 32, NULL, 7, NULL, 3);
+INSERT INTO power(power_name) VALUES('Flight'), 
+									('Wealth'), 
+									('Strength'), 
+									('Genius'), 
+									('Indestructibility'), 
+									('Immortality'), 
+									('Electricity'), 
+									('Shape-Shifting'), 
+									('Insanity'), 
+									('Robotic Arms');
+INSERT INTO villain_power(villain_id, power_id) VALUES(1, 4),
+													  (1, 10),
+													  (2, 7),
+													  (3, 3),
+													  (3, 8),
+													  (4, 2),
+													  (4, 4),
+													  (5, 4),
+													  (5, 9);
+INSERT INTO hero_power(hero_id, power_id) VALUES(1, 1),
+												(1, 2),
+												(1, 4),
+												(2, 4),
+												(3, 3),
+												(3, 4),
+												(3, 5),
+												(4, 1),
+												(4, 3),
+												(4, 5),
+												(5, 2),
+												(5, 4),
+												(6, 3),
+												(6, 5),
+												(6, 6),
+												(7, 3),
+												(7, 5),
+												(7, 6);
+                                                
 SELECT * FROM hero;
 SELECT * FROM hero_power;
 SELECT * FROM origin;
@@ -132,15 +202,8 @@ SELECT * FROM team;
 SELECT * FROM universe;
 SELECT * FROM villain;
 SELECT * FROM villain_power;
-
-INSERT INTO universe(universe_name, universe_founded) VALUES('Marvel', 1939);
-INSERT INTO team(team_name, team_established) VALUES('Avengers', '1963');
-INSERT INTO origin(origin_story) VALUES('Got stuck in cave. Made armor. Got out of cave.');
-INSERT INTO hero(hero_stage_name, hero_real_name, hero_age, archrival, origin_id, team_id, universe_id)
-	VALUES('Iron Man', 'Tony Stark', 42, NULL, 1, 1, 1);
-INSERT INTO power(power_name) VALUES('Flight'), ('Super Intelligence'), ('Snark'), ('Pew-Pew');
-INSERT INTO hero_power(hero_id, power_id) VALUES(1, 1), (1, 2), (1, 3), (1, 4);
-
+                                                
 SELECT hero_stage_name, power_name FROM hero JOIN hero_power ON hero.hero_id = hero_power.hero_id
-				 JOIN power ON hero_power.power_id = power.power_id;
-
+											 JOIN power ON hero_power.power_id = power.power_id;
+SELECT villain_stage_name, power_name FROM villain JOIN villain_power ON villain.villain_id = villain_power.villain_id
+												   JOIN power ON villain_power.power_id = power.power_id;
