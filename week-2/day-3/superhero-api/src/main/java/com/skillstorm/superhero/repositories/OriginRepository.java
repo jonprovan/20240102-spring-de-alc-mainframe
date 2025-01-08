@@ -1,5 +1,6 @@
 package com.skillstorm.superhero.repositories;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,12 @@ import com.skillstorm.superhero.models.Origin;
 // we extend an existing type of repo to get certain functionality
 // we must type the extension with the model type we want to get as well as the primary key type
 public interface OriginRepository extends CrudRepository<Origin, Integer> {
+	
+	// this is a custom query
+	// the value is the actual SQL query, nativeQuery means we can type it in plain SQL syntax
+	// we had to get fancy with the SQL wildcard (see the service)
+	// for the method stub, we DO NOT need to implement it!
+	@Query(value = "SELECT * FROM origin WHERE origin_story LIKE ?1;", nativeQuery = true)
+	Iterable<Origin> findAllStartingWith(String startsWith);
 
 }
