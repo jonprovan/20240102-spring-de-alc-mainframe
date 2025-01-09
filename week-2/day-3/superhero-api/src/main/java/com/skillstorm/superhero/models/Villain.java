@@ -1,5 +1,7 @@
 package com.skillstorm.superhero.models;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -8,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -65,13 +69,26 @@ public class Villain {
 //	
 //	@Column(name = "universe_id")
 //	private int universeId;
+	
+	// for our many-to-many relationship with Power, we can control the relationship from either side
+	// we have to specify the join table as well as the columns associated with the foreign keys, etc.
+	// for the JoinTable annotation, name is the name of the join table
+	// joinColumns specifies the column(s) in the join table that refer(s) to this side (the controlling side)
+	// inverseJoinColumns specifies the column(s) in the join table that refer(s) to the other side
+	// the controlling side will have all this information; the other side will have much less
+	@ManyToMany
+	@JoinTable(name = "villain_power",
+			   joinColumns = @JoinColumn(name = "villain_id"),
+			   inverseJoinColumns = @JoinColumn(name = "power_id"))
+	@JsonIgnoreProperties("villains")
+	private List<Power> powers;
 
 	public Villain() {
 		super();
 	}
 
-	public Villain(int villainId, String villainStageName, String villainRealName, int villainAge, Origin origin, Team team,
-			Universe universe) {
+	public Villain(int villainId, String villainStageName, String villainRealName, int villainAge, Origin origin,
+			Team team, Universe universe, List<Power> powers) {
 		super();
 		this.villainId = villainId;
 		this.villainStageName = villainStageName;
@@ -80,6 +97,7 @@ public class Villain {
 		this.origin = origin;
 		this.team = team;
 		this.universe = universe;
+		this.powers = powers;
 	}
 
 	public int getVillainId() {
@@ -138,11 +156,19 @@ public class Villain {
 		this.universe = universe;
 	}
 
+	public List<Power> getPowers() {
+		return powers;
+	}
+
+	public void setPowers(List<Power> powers) {
+		this.powers = powers;
+	}
+
 	@Override
 	public String toString() {
 		return "Villain [villainId=" + villainId + ", villainStageName=" + villainStageName + ", villainRealName="
 				+ villainRealName + ", villainAge=" + villainAge + ", origin=" + origin + ", team=" + team
-				+ ", universe=" + universe + "]";
+				+ ", universe=" + universe + ", powers=" + powers + "]";
 	}
 	
 }

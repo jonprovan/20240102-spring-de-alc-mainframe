@@ -47,7 +47,8 @@ public class VillainService {
 									 					 villainDTO.getVillainAge(),
 									 					 villainDTO.getOrigin(),
 									 					 villainDTO.getTeam(),
-									 					 villainDTO.getUniverse())));
+									 					 villainDTO.getUniverse(),
+									 					 null)));
 	}
 	
 	// update one
@@ -60,7 +61,8 @@ public class VillainService {
 										 					 villainDTO.getVillainAge(),
 										 					 villainDTO.getOrigin(),
 										 					 villainDTO.getTeam(),
-										 					 villainDTO.getUniverse())));
+										 					 villainDTO.getUniverse(),
+										 					 null)));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 								 .body(null);

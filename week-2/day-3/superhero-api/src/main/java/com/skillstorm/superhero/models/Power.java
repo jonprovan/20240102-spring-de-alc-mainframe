@@ -1,10 +1,15 @@
 package com.skillstorm.superhero.models;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,15 +23,20 @@ public class Power {
 	
 	@Column(name = "power_name")
 	private String powerName;
+	
+	@ManyToMany(mappedBy = "powers")
+	@JsonIgnoreProperties("powers")
+	private List<Villain> villains;
 
 	public Power() {
 		super();
 	}
 
-	public Power(int powerId, String powerName) {
+	public Power(int powerId, String powerName, List<Villain> villains) {
 		super();
 		this.powerId = powerId;
 		this.powerName = powerName;
+		this.villains = villains;
 	}
 
 	public int getPowerId() {
@@ -45,9 +55,17 @@ public class Power {
 		this.powerName = powerName;
 	}
 
+	public List<Villain> getVillains() {
+		return villains;
+	}
+
+	public void setVillains(List<Villain> villains) {
+		this.villains = villains;
+	}
+
 	@Override
 	public String toString() {
-		return "Power [powerId=" + powerId + ", powerName=" + powerName + "]";
+		return "Power [powerId=" + powerId + ", powerName=" + powerName + ", villains=" + villains + "]";
 	}
 
 }
