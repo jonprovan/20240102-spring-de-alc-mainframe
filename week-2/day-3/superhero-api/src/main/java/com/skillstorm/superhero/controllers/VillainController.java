@@ -18,13 +18,13 @@ import com.skillstorm.superhero.services.TeamService;
 
 @RestController
 @RequestMapping("/team")
-public class TeamController {
+public class VillainController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private TeamService service;
 
-	public TeamController(TeamService service) {
+	public VillainController(TeamService service) {
 		super();
 		this.service = service;
 	}

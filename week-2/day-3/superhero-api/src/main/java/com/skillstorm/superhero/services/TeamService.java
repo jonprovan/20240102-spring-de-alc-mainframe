@@ -7,9 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.skillstorm.superhero.dtos.TeamDTO;
-import com.skillstorm.superhero.dtos.UniverseDTO;
 import com.skillstorm.superhero.models.Team;
-import com.skillstorm.superhero.models.Universe;
 import com.skillstorm.superhero.repositories.TeamRepository;
 
 @Service
