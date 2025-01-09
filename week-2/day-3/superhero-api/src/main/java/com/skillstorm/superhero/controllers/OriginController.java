@@ -63,13 +63,13 @@ public class OriginController {
 	// @RequestBody assigns the body of the request to the following variable
 	// we'll have no problem if the JSON is structured to match the type
 	@PostMapping
-	public ResponseEntity<Origin> addOne(@RequestBody() OriginDTO originDTO) {
+	public ResponseEntity<Origin> addOne(@RequestBody OriginDTO originDTO) {
 		return service.addOne(originDTO);
 	}
 	
 	// updating one
 	@PutMapping("/{originId}")
-	public ResponseEntity<Origin> updateOne(@PathVariable("originId") int originId, @RequestBody() OriginDTO originDTO) {
+	public ResponseEntity<Origin> updateOne(@PathVariable("originId") int originId, @RequestBody OriginDTO originDTO) {
 		return service.updateOne(originId, originDTO);
 	}
 	

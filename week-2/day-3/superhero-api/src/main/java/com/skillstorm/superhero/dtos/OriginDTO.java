@@ -19,4 +19,9 @@ public class OriginDTO {
 		this.originStory = originStory;
 	}
 
+	@Override
+	public String toString() {
+		return "OriginDTO [originStory=" + originStory + "]";
+	}
+
 }
