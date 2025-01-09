@@ -44,7 +44,7 @@ public class Villain {
 	
 	@OneToOne
 	@JoinColumn(name = "origin_id", referencedColumnName = "origin_id")
-	@JsonIgnoreProperties("villain")
+	@JsonIgnoreProperties({"villain", "hero"})
 	private Origin origin;
 	
 //	@Column(name = "origin_id")
@@ -56,12 +56,12 @@ public class Villain {
 	
 	@ManyToOne
 	@JoinColumn(name = "team_id", referencedColumnName = "team_id")
-	@JsonIgnoreProperties("villains")
+	@JsonIgnoreProperties({"villains", "heroes"})
 	private Team team;
 	
 	@ManyToOne
 	@JoinColumn(name = "universe_id", referencedColumnName = "universe_id")
-	@JsonIgnoreProperties("villains")
+	@JsonIgnoreProperties({"villains", "heroes"})
 	private Universe universe;
 	
 //	@Column(name = "team_id")
@@ -80,15 +80,19 @@ public class Villain {
 	@JoinTable(name = "villain_power",
 			   joinColumns = @JoinColumn(name = "villain_id"),
 			   inverseJoinColumns = @JoinColumn(name = "power_id"))
-	@JsonIgnoreProperties("villains")
+	@JsonIgnoreProperties({"villains", "heroes"})
 	private List<Power> powers;
+	
+	@OneToOne(mappedBy = "archrival")
+	@JsonIgnoreProperties("archrival")
+	private Hero archrival;
 
 	public Villain() {
 		super();
 	}
 
 	public Villain(int villainId, String villainStageName, String villainRealName, int villainAge, Origin origin,
-			Team team, Universe universe, List<Power> powers) {
+			Team team, Universe universe, List<Power> powers, Hero archrival) {
 		super();
 		this.villainId = villainId;
 		this.villainStageName = villainStageName;
@@ -98,6 +102,7 @@ public class Villain {
 		this.team = team;
 		this.universe = universe;
 		this.powers = powers;
+		this.archrival = archrival;
 	}
 
 	public int getVillainId() {
@@ -164,11 +169,19 @@ public class Villain {
 		this.powers = powers;
 	}
 
+	public Hero getArchrival() {
+		return archrival;
+	}
+
+	public void setArchrival(Hero archrival) {
+		this.archrival = archrival;
+	}
+
 	@Override
 	public String toString() {
 		return "Villain [villainId=" + villainId + ", villainStageName=" + villainStageName + ", villainRealName="
 				+ villainRealName + ", villainAge=" + villainAge + ", origin=" + origin + ", team=" + team
-				+ ", universe=" + universe + ", powers=" + powers + "]";
+				+ ", universe=" + universe + ", powers=" + powers + ", archrival=" + archrival + "]";
 	}
 	
 }

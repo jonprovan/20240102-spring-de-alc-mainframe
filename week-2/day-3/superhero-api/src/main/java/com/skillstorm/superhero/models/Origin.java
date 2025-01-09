@@ -3,6 +3,7 @@ package com.skillstorm.superhero.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,22 +32,27 @@ public class Origin {
 	// this property is NOT in the database, but we need it in order to link back to the villain who has this origin
 	// since the relationship is controlled by the other side
 	// we tell this property which property on the controlling side maps it
-	@OneToOne(mappedBy = "origin")
+	@OneToOne(mappedBy = "origin", cascade = CascadeType.ALL)
 	// we can remove this property completely from the JSON output
 //	@JsonIgnore
 	// OR, we can limit how much of it we see by ignoring certain properties
 	@JsonIgnoreProperties("origin")
 	private Villain villain;
-
+	
+	@OneToOne(mappedBy = "origin", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("origin")
+	private Hero hero;
+	
 	public Origin() {
 		super();
 	}
 
-	public Origin(int originId, String originStory, Villain villain) {
+	public Origin(int originId, String originStory, Villain villain, Hero hero) {
 		super();
 		this.originId = originId;
 		this.originStory = originStory;
 		this.villain = villain;
+		this.hero = hero;
 	}
 
 	public int getOriginId() {
@@ -73,9 +79,18 @@ public class Origin {
 		this.villain = villain;
 	}
 
+	public Hero getHero() {
+		return hero;
+	}
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+
 	@Override
 	public String toString() {
-		return "Origin [originId=" + originId + ", originStory=" + originStory + ", villain=" + villain + "]";
+		return "Origin [originId=" + originId + ", originStory=" + originStory + ", villain=" + villain + ", hero="
+				+ hero + "]";
 	}
 	
 }

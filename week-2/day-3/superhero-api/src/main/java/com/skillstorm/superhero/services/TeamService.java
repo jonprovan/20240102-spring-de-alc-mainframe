@@ -41,14 +41,14 @@ public class TeamService {
 	// create one
 	public ResponseEntity<Team> addOne(TeamDTO teamDTO) {
 		return ResponseEntity.status(HttpStatus.CREATED)
-							 .body(repo.save(new Team(0, teamDTO.getTeamName(), teamDTO.getTeamEstablished(), null)));
+							 .body(repo.save(new Team(0, teamDTO.getTeamName(), teamDTO.getTeamEstablished(), null, null)));
 	}
 	
 	// update one
 	public ResponseEntity<Team> updateOne(int teamId, TeamDTO teamDTO) {
 		if (repo.existsById(teamId))
 			return ResponseEntity.status(HttpStatus.OK)
-								 .body(repo.save(new Team(teamId, teamDTO.getTeamName(), teamDTO.getTeamEstablished(), null)));
+								 .body(repo.save(new Team(teamId, teamDTO.getTeamName(), teamDTO.getTeamEstablished(), null, null)));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 								 .body(null);

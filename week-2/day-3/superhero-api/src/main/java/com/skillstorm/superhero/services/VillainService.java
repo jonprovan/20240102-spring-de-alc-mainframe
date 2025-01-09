@@ -48,6 +48,7 @@ public class VillainService {
 									 					 villainDTO.getOrigin(),
 									 					 villainDTO.getTeam(),
 									 					 villainDTO.getUniverse(),
+									 					 null,
 									 					 null)));
 	}
 	
@@ -62,6 +63,7 @@ public class VillainService {
 										 					 villainDTO.getOrigin(),
 										 					 villainDTO.getTeam(),
 										 					 villainDTO.getUniverse(),
+										 					 null,
 										 					 null)));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -70,7 +72,7 @@ public class VillainService {
 	
 	// delete one
 	public ResponseEntity<Void> deleteOne(int villainId) {
-		repo.deleteById(villainId);
+		repo.forceDelete(villainId);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT)
 							 .body(null);
 	}

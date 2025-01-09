@@ -591,6 +591,122 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Hero",
+			"item": [
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/hero",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"hero"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/hero/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"hero",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"heroStageName\": \"Test Stage Name\",\r\n    \"heroRealName\": \"Test Real Name\",\r\n    \"heroAge\": 9999,\r\n    \"archrival\": {\r\n        \"villainId\": 1\r\n    },\r\n    \"origin\": {\r\n        \"originId\": 1\r\n    },\r\n    \"team\": {\r\n        \"teamId\": 1\r\n    },\r\n    \"universe\": {\r\n        \"universeId\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/hero",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"hero"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"heroStageName\": \"Test Stage Name\",\r\n    \"heroRealName\": \"Test Real Name\",\r\n    \"heroAge\": 9999,\r\n    \"archrival\": {\r\n        \"villainId\": 1\r\n    },\r\n    \"origin\": {\r\n        \"originId\": 1\r\n    },\r\n    \"team\": {\r\n        \"teamId\": 1\r\n    },\r\n    \"universe\": {\r\n        \"universeId\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/hero/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"hero",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/hero/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"hero",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

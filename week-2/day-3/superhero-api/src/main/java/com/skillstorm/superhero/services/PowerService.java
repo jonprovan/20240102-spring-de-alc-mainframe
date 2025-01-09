@@ -41,14 +41,14 @@ public class PowerService {
 	// create one
 	public ResponseEntity<Power> addOne(PowerDTO powerDTO) {
 		return ResponseEntity.status(HttpStatus.CREATED)
-							 .body(repo.save(new Power(0, powerDTO.getPowerName(), null)));
+							 .body(repo.save(new Power(0, powerDTO.getPowerName(), null, null)));
 	}
 	
 	// update one
 	public ResponseEntity<Power> updateOne(int teamId, PowerDTO powerDTO) {
 		if (repo.existsById(teamId))
 			return ResponseEntity.status(HttpStatus.OK)
-								 .body(repo.save(new Power(teamId, powerDTO.getPowerName(), null)));
+								 .body(repo.save(new Power(teamId, powerDTO.getPowerName(), null, null)));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 								 .body(null);

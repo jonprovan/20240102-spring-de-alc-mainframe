@@ -79,7 +79,7 @@ public class OriginService {
 	// we avoid having to check if it exists and shrink the amount of data necessary for the GET request
 	public ResponseEntity<Origin> addOne(OriginDTO originDTO) {
 		return ResponseEntity.status(HttpStatus.CREATED)
-							 .body(repo.save(new Origin(0, originDTO.getOriginStory(), null)));
+							 .body(repo.save(new Origin(0, originDTO.getOriginStory(), null, null)));
 	}
 	
 	// updating one
@@ -89,7 +89,7 @@ public class OriginService {
 			
 			try {
 				return ResponseEntity.status(HttpStatus.OK)
-						 .body(repo.save(new Origin(originId, originDTO.getOriginStory(), null)));
+						 .body(repo.save(new Origin(originId, originDTO.getOriginStory(), null, null)));
 			} catch (Exception e) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 						 .body(null);

@@ -31,17 +31,22 @@ public class Team {
 	@OneToMany(mappedBy = "team")
 	@JsonIgnoreProperties("team")
 	private List<Villain> villains;
+	
+	@OneToMany(mappedBy = "team")
+	@JsonIgnoreProperties("team")
+	private List<Hero> heroes;
 
 	public Team() {
 		super();
 	}
 
-	public Team(int teamId, String teamName, String teamEstablished, List<Villain> villains) {
+	public Team(int teamId, String teamName, String teamEstablished, List<Villain> villains, List<Hero> heroes) {
 		super();
 		this.teamId = teamId;
 		this.teamName = teamName;
 		this.teamEstablished = teamEstablished;
 		this.villains = villains;
+		this.heroes = heroes;
 	}
 
 	public int getTeamId() {
@@ -76,10 +81,18 @@ public class Team {
 		this.villains = villains;
 	}
 
+	public List<Hero> getHeroes() {
+		return heroes;
+	}
+
+	public void setHeroes(List<Hero> heroes) {
+		this.heroes = heroes;
+	}
+
 	@Override
 	public String toString() {
 		return "Team [teamId=" + teamId + ", teamName=" + teamName + ", teamEstablished=" + teamEstablished
-				+ ", villains=" + villains + "]";
+				+ ", villains=" + villains + ", heroes=" + heroes + "]";
 	}
 
 }

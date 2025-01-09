@@ -41,14 +41,14 @@ public class UniverseService {
 	// create one
 	public ResponseEntity<Universe> addOne(UniverseDTO universeDTO) {
 		return ResponseEntity.status(HttpStatus.CREATED)
-							 .body(repo.save(new Universe(0, universeDTO.getUniverseName(), universeDTO.getUniverseFounded(), null)));
+							 .body(repo.save(new Universe(0, universeDTO.getUniverseName(), universeDTO.getUniverseFounded(), null, null)));
 	}
 	
 	// update one
 	public ResponseEntity<Universe> updateOne(int universeId, UniverseDTO universeDTO) {
 		if (repo.existsById(universeId))
 			return ResponseEntity.status(HttpStatus.OK)
-								 .body(repo.save(new Universe(universeId, universeDTO.getUniverseName(), universeDTO.getUniverseFounded(), null)));
+								 .body(repo.save(new Universe(universeId, universeDTO.getUniverseName(), universeDTO.getUniverseFounded(), null, null)));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 								 .body(null);

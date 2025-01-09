@@ -27,16 +27,21 @@ public class Power {
 	@ManyToMany(mappedBy = "powers")
 	@JsonIgnoreProperties("powers")
 	private List<Villain> villains;
+	
+	@ManyToMany(mappedBy = "powers")
+	@JsonIgnoreProperties("powers")
+	private List<Hero> heroes;
 
 	public Power() {
 		super();
 	}
 
-	public Power(int powerId, String powerName, List<Villain> villains) {
+	public Power(int powerId, String powerName, List<Villain> villains, List<Hero> heroes) {
 		super();
 		this.powerId = powerId;
 		this.powerName = powerName;
 		this.villains = villains;
+		this.heroes = heroes;
 	}
 
 	public int getPowerId() {
@@ -63,9 +68,18 @@ public class Power {
 		this.villains = villains;
 	}
 
+	public List<Hero> getHeroes() {
+		return heroes;
+	}
+
+	public void setHeroes(List<Hero> heroes) {
+		this.heroes = heroes;
+	}
+
 	@Override
 	public String toString() {
-		return "Power [powerId=" + powerId + ", powerName=" + powerName + ", villains=" + villains + "]";
+		return "Power [powerId=" + powerId + ", powerName=" + powerName + ", villains=" + villains + ", heroes="
+				+ heroes + "]";
 	}
 
 }

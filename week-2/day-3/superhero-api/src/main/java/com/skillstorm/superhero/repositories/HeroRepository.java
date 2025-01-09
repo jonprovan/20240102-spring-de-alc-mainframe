@@ -5,16 +5,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.skillstorm.superhero.models.Villain;
+import com.skillstorm.superhero.models.Hero;
 
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface VillainRepository extends CrudRepository<Villain, Integer> {
+public interface HeroRepository extends CrudRepository<Hero, Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "DELETE FROM villain WHERE villain_id = ?1;", nativeQuery = true)
-	void forceDelete(int villainId);
+	@Query(value = "DELETE FROM hero WHERE hero_id = ?1;", nativeQuery = true)
+	void forceDelete(int heroId);
 
 }

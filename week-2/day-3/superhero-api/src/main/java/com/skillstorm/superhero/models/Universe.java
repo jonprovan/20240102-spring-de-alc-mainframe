@@ -30,17 +30,23 @@ public class Universe {
 	@OneToMany(mappedBy = "universe")
 	@JsonIgnoreProperties("universe")
 	private List<Villain> villains;
+	
+	@OneToMany(mappedBy = "universe")
+	@JsonIgnoreProperties("universe")
+	private List<Hero> heroes;
 
 	public Universe() {
 		super();
 	}
 
-	public Universe(int universeId, String universeName, int universeFounded, List<Villain> villains) {
+	public Universe(int universeId, String universeName, int universeFounded, List<Villain> villains,
+			List<Hero> heroes) {
 		super();
 		this.universeId = universeId;
 		this.universeName = universeName;
 		this.universeFounded = universeFounded;
 		this.villains = villains;
+		this.heroes = heroes;
 	}
 
 	public int getUniverseId() {
@@ -75,10 +81,18 @@ public class Universe {
 		this.villains = villains;
 	}
 
+	public List<Hero> getHeroes() {
+		return heroes;
+	}
+
+	public void setHeroes(List<Hero> heroes) {
+		this.heroes = heroes;
+	}
+
 	@Override
 	public String toString() {
 		return "Universe [universeId=" + universeId + ", universeName=" + universeName + ", universeFounded="
-				+ universeFounded + ", villains=" + villains + "]";
+				+ universeFounded + ", villains=" + villains + ", heroes=" + heroes + "]";
 	}
 
 }
