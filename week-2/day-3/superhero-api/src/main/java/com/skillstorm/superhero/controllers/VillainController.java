@@ -36,7 +36,7 @@ public class VillainController {
 	}
 	
 	// find one by ID
-	@GetMapping("/{teamId}")
+	@GetMapping("/{villainId}")
 	public ResponseEntity<Villain> findById(@PathVariable int villainId) {
 		return service.findById(villainId);
 	}
@@ -48,13 +48,13 @@ public class VillainController {
 	}
 	
 	// update one
-	@PutMapping("/{teamId}")
+	@PutMapping("/{villainId}")
 	public ResponseEntity<Villain> updateOne(@PathVariable int villainId, @RequestBody VillainDTO villainDTO) {
 		return service.updateOne(villainId, villainDTO);
 	}
 	
 	// delete one
-	@DeleteMapping("/{teamId}")
+	@DeleteMapping("/{villainId}")
 	public ResponseEntity<Void> deleteOne(@PathVariable int villainId) {
 		return service.deleteOne(villainId);
 	}

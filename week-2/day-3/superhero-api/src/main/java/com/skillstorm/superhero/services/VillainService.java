@@ -45,9 +45,9 @@ public class VillainService {
 									 					 villainDTO.getVillainStageName(), 
 									 					 villainDTO.getVillainRealName(), 
 									 					 villainDTO.getVillainAge(),
-									 					 villainDTO.getOriginId(),
-									 					 villainDTO.getTeamId(),
-									 					 villainDTO.getUniverseId())));
+									 					 villainDTO.getOrigin(),
+									 					 villainDTO.getTeam(),
+									 					 villainDTO.getUniverse())));
 	}
 	
 	// update one
@@ -58,9 +58,9 @@ public class VillainService {
 										 					 villainDTO.getVillainStageName(), 
 										 					 villainDTO.getVillainRealName(), 
 										 					 villainDTO.getVillainAge(),
-										 					 villainDTO.getOriginId(),
-										 					 villainDTO.getTeamId(),
-										 					 villainDTO.getUniverseId())));
+										 					 villainDTO.getOrigin(),
+										 					 villainDTO.getTeam(),
+										 					 villainDTO.getUniverse())));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 								 .body(null);

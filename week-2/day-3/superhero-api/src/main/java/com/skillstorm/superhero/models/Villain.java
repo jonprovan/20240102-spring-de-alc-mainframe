@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,29 +28,53 @@ public class Villain {
 	@Column(name = "villain_age")
 	private int villainAge;
 	
-	@Column(name = "origin_id")
-	private int originId;
+	// these three columns are foreign keys to other tables
+	// we want to map them to the objects they represent
+	// this way, when we make requests, we can get back the related records
 	
-	@Column(name = "team_id")
-	private int teamId;
+	// the OneToOne annotation specifies that type of relationship
+	// in JoinColumn, name is the column in this table, referencedColumnName is the column in the other table
+	// it knows which table to look in from the object type
 	
-	@Column(name = "universe_id")
-	private int universeId;
+	@OneToOne
+	@JoinColumn(name = "origin_id", referencedColumnName = "origin_id")
+	private Origin origin;
+	
+//	@Column(name = "origin_id")
+//	private int originId;
+	
+	// the other two are many-to-one
+	// many villains go to one team/universe, so we use ManyToOne here and not OneToMany
+	// in the other classes, we'd use OneToMany
+	
+	@ManyToOne
+	@JoinColumn(name = "team_id", referencedColumnName = "team_id")
+	private Team team;
+	
+	@ManyToOne
+	@JoinColumn(name = "universe_id", referencedColumnName = "universe_id")
+	private Universe universe;
+	
+//	@Column(name = "team_id")
+//	private int teamId;
+//	
+//	@Column(name = "universe_id")
+//	private int universeId;
 
 	public Villain() {
 		super();
 	}
 
-	public Villain(int villainId, String villainStageName, String villainRealName, int villainAge, int originId,
-			int teamId, int universeId) {
+	public Villain(int villainId, String villainStageName, String villainRealName, int villainAge, Origin origin, Team team,
+			Universe universe) {
 		super();
 		this.villainId = villainId;
 		this.villainStageName = villainStageName;
 		this.villainRealName = villainRealName;
 		this.villainAge = villainAge;
-		this.originId = originId;
-		this.teamId = teamId;
-		this.universeId = universeId;
+		this.origin = origin;
+		this.team = team;
+		this.universe = universe;
 	}
 
 	public int getVillainId() {
@@ -82,35 +109,35 @@ public class Villain {
 		this.villainAge = villainAge;
 	}
 
-	public int getOriginId() {
-		return originId;
+	public Origin getOrigin() {
+		return origin;
 	}
 
-	public void setOriginId(int originId) {
-		this.originId = originId;
+	public void setOrigin(Origin origin) {
+		this.origin = origin;
 	}
 
-	public int getTeamId() {
-		return teamId;
+	public Team getTeam() {
+		return team;
 	}
 
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
-	public int getUniverseId() {
-		return universeId;
+	public Universe getUniverse() {
+		return universe;
 	}
 
-	public void setUniverseId(int universeId) {
-		this.universeId = universeId;
+	public void setUniverse(Universe universe) {
+		this.universe = universe;
 	}
 
 	@Override
 	public String toString() {
 		return "Villain [villainId=" + villainId + ", villainStageName=" + villainStageName + ", villainRealName="
-				+ villainRealName + ", villainAge=" + villainAge + ", originId=" + originId + ", teamId=" + teamId
-				+ ", universeId=" + universeId + "]";
+				+ villainRealName + ", villainAge=" + villainAge + ", origin=" + origin + ", team=" + team
+				+ ", universe=" + universe + "]";
 	}
-
+	
 }

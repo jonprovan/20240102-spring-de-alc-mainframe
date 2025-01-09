@@ -193,16 +193,7 @@ INSERT INTO hero_power(hero_id, power_id) VALUES(1, 1),
 												(7, 3),
 												(7, 5),
 												(7, 6);
-                                                
-SELECT * FROM hero;
-SELECT * FROM hero_power;
-SELECT * FROM origin;
-SELECT * FROM power;
-SELECT * FROM team;
-SELECT * FROM universe;
-SELECT * FROM villain;
-SELECT * FROM villain_power;
-                                                
+
 SELECT hero_stage_name, power_name FROM hero JOIN hero_power ON hero.hero_id = hero_power.hero_id
 											 JOIN power ON hero_power.power_id = power.power_id;
 SELECT villain_stage_name, power_name FROM villain JOIN villain_power ON villain.villain_id = villain_power.villain_id
