@@ -6,57 +6,57 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.skillstorm.superhero.dtos.TeamDTO;
-import com.skillstorm.superhero.models.Team;
-import com.skillstorm.superhero.repositories.TeamRepository;
+import com.skillstorm.superhero.dtos.PowerDTO;
+import com.skillstorm.superhero.models.Power;
+import com.skillstorm.superhero.repositories.PowerRepository;
 
 @Service
-public class TeamService {
+public class PowerService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private TeamRepository repo;
+	private PowerRepository repo;
 
-	public TeamService(TeamRepository repo) {
+	public PowerService(PowerRepository repo) {
 		super();
 		this.repo = repo;
 	}
 	
 	// get
-	public ResponseEntity<Iterable<Team>> findAll() {
+	public ResponseEntity<Iterable<Power>> findAll() {
 		return ResponseEntity.status(HttpStatus.OK)
 							 .body(repo.findAll());
 	}
 	
 	// get by ID
-	public ResponseEntity<Team> findById(int teamId) {
-		if (repo.existsById(teamId))
+	public ResponseEntity<Power> findById(int powerId) {
+		if (repo.existsById(powerId))
 			return ResponseEntity.status(HttpStatus.OK)
-								 .body(repo.findById(teamId).get());
+								 .body(repo.findById(powerId).get());
 		else
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 								 .body(null);
 	}
 	
 	// create one
-	public ResponseEntity<Team> addOne(TeamDTO teamDTO) {
+	public ResponseEntity<Power> addOne(PowerDTO powerDTO) {
 		return ResponseEntity.status(HttpStatus.CREATED)
-							 .body(repo.save(new Team(0, teamDTO.getTeamName(), teamDTO.getTeamEstablished(), null)));
+							 .body(repo.save(new Power(0, powerDTO.getPowerName())));
 	}
 	
 	// update one
-	public ResponseEntity<Team> updateOne(int teamId, TeamDTO teamDTO) {
+	public ResponseEntity<Power> updateOne(int teamId, PowerDTO powerDTO) {
 		if (repo.existsById(teamId))
 			return ResponseEntity.status(HttpStatus.OK)
-								 .body(repo.save(new Team(teamId, teamDTO.getTeamName(), teamDTO.getTeamEstablished(), null)));
+								 .body(repo.save(new Power(teamId, powerDTO.getPowerName())));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 								 .body(null);
 	}
 	
 	// delete one
-	public ResponseEntity<Void> deleteOne(int teamId) {
-		repo.deleteById(teamId);
+	public ResponseEntity<Void> deleteOne(int powerId) {
+		repo.deleteById(powerId);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT)
 							 .body(null);
 	}

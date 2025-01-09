@@ -1,10 +1,15 @@
 package com.skillstorm.superhero.models;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,16 +26,21 @@ public class Universe {
 	
 	@Column(name = "universe_founded")
 	private int universeFounded;
+	
+	@OneToMany(mappedBy = "universe")
+	@JsonIgnoreProperties("universe")
+	private List<Villain> villains;
 
 	public Universe() {
 		super();
 	}
 
-	public Universe(int universeId, String universeName, int universeFounded) {
+	public Universe(int universeId, String universeName, int universeFounded, List<Villain> villains) {
 		super();
 		this.universeId = universeId;
 		this.universeName = universeName;
 		this.universeFounded = universeFounded;
+		this.villains = villains;
 	}
 
 	public int getUniverseId() {
@@ -57,10 +67,18 @@ public class Universe {
 		this.universeFounded = universeFounded;
 	}
 
+	public List<Villain> getVillains() {
+		return villains;
+	}
+
+	public void setVillains(List<Villain> villains) {
+		this.villains = villains;
+	}
+
 	@Override
 	public String toString() {
 		return "Universe [universeId=" + universeId + ", universeName=" + universeName + ", universeFounded="
-				+ universeFounded + "]";
+				+ universeFounded + ", villains=" + villains + "]";
 	}
 
 }

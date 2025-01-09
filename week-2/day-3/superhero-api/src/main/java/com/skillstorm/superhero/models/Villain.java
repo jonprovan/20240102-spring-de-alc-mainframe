@@ -1,5 +1,7 @@
 package com.skillstorm.superhero.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,12 +34,13 @@ public class Villain {
 	// we want to map them to the objects they represent
 	// this way, when we make requests, we can get back the related records
 	
-	// the OneToOne annotation specifies that type of relationship
+	// the OneToOne annotation specifies a one-to-one relationship
 	// in JoinColumn, name is the column in this table, referencedColumnName is the column in the other table
 	// it knows which table to look in from the object type
 	
 	@OneToOne
 	@JoinColumn(name = "origin_id", referencedColumnName = "origin_id")
+	@JsonIgnoreProperties("villain")
 	private Origin origin;
 	
 //	@Column(name = "origin_id")
@@ -49,10 +52,12 @@ public class Villain {
 	
 	@ManyToOne
 	@JoinColumn(name = "team_id", referencedColumnName = "team_id")
+	@JsonIgnoreProperties("villains")
 	private Team team;
 	
 	@ManyToOne
 	@JoinColumn(name = "universe_id", referencedColumnName = "universe_id")
+	@JsonIgnoreProperties("villains")
 	private Universe universe;
 	
 //	@Column(name = "team_id")
