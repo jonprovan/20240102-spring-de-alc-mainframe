@@ -6,11 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.skillstorm.superhero.dtos.TeamDTO;
 import com.skillstorm.superhero.dtos.VillainDTO;
-import com.skillstorm.superhero.models.Team;
 import com.skillstorm.superhero.models.Villain;
-import com.skillstorm.superhero.repositories.TeamRepository;
 import com.skillstorm.superhero.repositories.VillainRepository;
 
 @Service

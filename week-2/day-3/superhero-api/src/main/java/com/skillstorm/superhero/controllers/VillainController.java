@@ -12,51 +12,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skillstorm.superhero.dtos.TeamDTO;
-import com.skillstorm.superhero.models.Team;
-import com.skillstorm.superhero.services.TeamService;
+import com.skillstorm.superhero.dtos.VillainDTO;
+import com.skillstorm.superhero.models.Villain;
+import com.skillstorm.superhero.services.VillainService;
 
 @RestController
-@RequestMapping("/team")
+@RequestMapping("/villain")
 public class VillainController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private TeamService service;
+	private VillainService service;
 
-	public VillainController(TeamService service) {
+	public VillainController(VillainService service) {
 		super();
 		this.service = service;
 	}
 	
 	// find all
 	@GetMapping
-	public ResponseEntity<Iterable<Team>> findAll() {
+	public ResponseEntity<Iterable<Villain>> findAll() {
 		return service.findAll();
 	}
 	
 	// find one by ID
 	@GetMapping("/{teamId}")
-	public ResponseEntity<Team> findById(@PathVariable int teamId) {
-		return service.findById(teamId);
+	public ResponseEntity<Villain> findById(@PathVariable int villainId) {
+		return service.findById(villainId);
 	}
 	
 	// add one
 	@PostMapping
-	public ResponseEntity<Team> addOne(@RequestBody TeamDTO teamDTO) {
-		return service.addOne(teamDTO);
+	public ResponseEntity<Villain> addOne(@RequestBody VillainDTO villainDTO) {
+		return service.addOne(villainDTO);
 	}
 	
 	// update one
 	@PutMapping("/{teamId}")
-	public ResponseEntity<Team> updateOne(@PathVariable int teamId, @RequestBody TeamDTO teamDTO) {
-		return service.updateOne(teamId, teamDTO);
+	public ResponseEntity<Villain> updateOne(@PathVariable int villainId, @RequestBody VillainDTO villainDTO) {
+		return service.updateOne(villainId, villainDTO);
 	}
 	
 	// delete one
 	@DeleteMapping("/{teamId}")
-	public ResponseEntity<Void> deleteOne(@PathVariable int teamId) {
-		return service.deleteOne(teamId);
+	public ResponseEntity<Void> deleteOne(@PathVariable int villainId) {
+		return service.deleteOne(villainId);
 	}
 	
 }
