@@ -1,0 +1,13 @@
+# remember to match this with the LB call in the gateway!!
+spring:
+ application:
+  name: menu-service
+
+server:
+ port: 8082
+
+# we do NOT need to say this should register-with-eureka, it does so by default
+eureka:
+ client:
+  service-url:
+   defaultZone: http://localhost:8761/eureka

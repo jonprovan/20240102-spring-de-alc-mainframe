@@ -1,0 +1,29 @@
+# the spring.application.name property will be the name of this server that gets registered to Eureka, so it matters!
+# each route points to a different service; requests entering the gateway will be passed along based on the URL suffix
+# the service name after the lb:// MUST MATCH THE NAME DESIGNATED IN THE OTHER SERVICE!!
+
+spring:
+ application:
+  name:
+   gateway
+ cloud:
+  gateway:
+   routes:
+   - id: restaurant-service-route
+     uri: lb://restaurant-service
+     predicates:
+     - Path=/restaurant/**
+   - id: menu-service-route
+     uri: lb://menu-service
+     predicates:
+     - Path=/menu/**
+
+# a typical port for a gateway
+server:
+ port: 9000
+
+# we need this again, so this service can register with the Eureka server
+eureka:
+ client:
+  service-url:
+   defaultZone: http://localhost:8761/eureka
